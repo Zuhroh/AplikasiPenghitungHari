@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
 public class PenghitungHariFrame extends javax.swing.JFrame {
-    
+
     public PenghitungHariFrame() {
         initComponents();
         setSize(600, 700);
@@ -32,18 +32,18 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         comboxBulan = new javax.swing.JComboBox<>();
         spinnerTahun = new javax.swing.JSpinner();
-        calenderBulanTahun = new com.toedter.calendar.JCalendar();
         btnHitungHari = new javax.swing.JButton();
         txtJumlahHari = new javax.swing.JTextField();
         txtPertama = new javax.swing.JTextField();
         txtTerakhir = new javax.swing.JTextField();
-        dateChooserAwal = new com.toedter.calendar.JDateChooser();
-        dateChooserAkhir = new com.toedter.calendar.JDateChooser();
         btnHitungSelisih = new javax.swing.JButton();
         txtSelisih = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnHapus = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
+        calendarBulanTahun = new com.toedter.calendar.JCalendar();
+        dateChooserAwal = new com.toedter.calendar.JDateChooser();
+        dateChooserAkhir = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Penghitung Hari");
@@ -175,18 +175,6 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 10;
         jPanel1.add(jPanel2, gridBagConstraints);
 
-        calenderBulanTahun.setBackground(new java.awt.Color(255, 255, 255));
-        calenderBulanTahun.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                calenderBulanTahunPropertyChange(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel1.add(calenderBulanTahun, gridBagConstraints);
-
         btnHitungHari.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         btnHitungHari.setText("Hitung");
         btnHitungHari.addActionListener(new java.awt.event.ActionListener() {
@@ -228,20 +216,6 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 10;
         jPanel1.add(txtTerakhir, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 10;
-        jPanel1.add(dateChooserAwal, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 10;
-        jPanel1.add(dateChooserAkhir, gridBagConstraints);
 
         btnHitungSelisih.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         btnHitungSelisih.setText("Hitung");
@@ -295,6 +269,25 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel1.add(jPanel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel1.add(calendarBulanTahun, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
+        jPanel1.add(dateChooserAwal, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
+        jPanel1.add(dateChooserAkhir, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -304,17 +297,17 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
     private void comboxBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxBulanActionPerformed
         int indexBulan = comboxBulan.getSelectedIndex();
         if (indexBulan > 0) { // Pastikan bukan "Pilih Bulan"
-            java.util.Calendar calendar = calenderBulanTahun.getCalendar();
+            java.util.Calendar calendar = calendarBulanTahun.getCalendar();
             calendar.set(java.util.Calendar.MONTH, indexBulan - 1);
-            calenderBulanTahun.setCalendar(calendar);
+            calendarBulanTahun.setCalendar(calendar);
         }
     }//GEN-LAST:event_comboxBulanActionPerformed
 
     private void spinnerTahunStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerTahunStateChanged
         int tahun = (int) spinnerTahun.getValue();
-        java.util.Calendar calendar = calenderBulanTahun.getCalendar();
+        java.util.Calendar calendar = calendarBulanTahun.getCalendar();
         calendar.set(java.util.Calendar.YEAR, tahun);
-        calenderBulanTahun.setCalendar(calendar);
+        calendarBulanTahun.setCalendar(calendar);
     }//GEN-LAST:event_spinnerTahunStateChanged
 
     private void calenderBulanTahunPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calenderBulanTahunPropertyChange
@@ -396,7 +389,7 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.set(java.util.Calendar.MONTH, java.util.Calendar.JANUARY);  // Atur ke Januari
         calendar.set(java.util.Calendar.YEAR, 2024);  // Atur tahun default (misalnya 2024)
-        calenderBulanTahun.setCalendar(calendar);
+        calendarBulanTahun.setCalendar(calendar);
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
@@ -438,7 +431,7 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnHitungHari;
     private javax.swing.JButton btnHitungSelisih;
     private javax.swing.JButton btnKeluar;
-    private com.toedter.calendar.JCalendar calenderBulanTahun;
+    private com.toedter.calendar.JCalendar calendarBulanTahun;
     private javax.swing.JComboBox<String> comboxBulan;
     private com.toedter.calendar.JDateChooser dateChooserAkhir;
     private com.toedter.calendar.JDateChooser dateChooserAwal;
